@@ -33,4 +33,4 @@ jobs:
       with:
         context: backend
         push: true
-        tags: octabyte-assignment/backend:latest
+        tags: soundaryanarayana6/octabyte-assignment:latest
