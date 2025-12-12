@@ -1,0 +1,32 @@
+# macOS
+.DS_Store
+
+# Terraform
+.terraform/
+**/.terraform/*
+*.tfstate.backup
+terraform.tfstate.backup
+*.tfvars.json
+crash.log
+override.tf
+override.tf.json
+
+# Sensitive keys
+
+*.key
+
+# IDEs and editors
+.vscode/
+.idea/
+*.iml
+
+# OS
+Thumbs.db
+
+# Logs
+*.log
+
+# Node / Python common
+node_modules/
+__pycache__/
+*.py[cod]
