@@ -10,5 +10,5 @@ output "rds_sg_id" {
 }
 
 output "alb_dns_name" {
-  value = module.alb.aws_lb.alb.dns_name
+  value = module.alb.alb_dns
 }
