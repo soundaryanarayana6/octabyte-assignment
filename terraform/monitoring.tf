@@ -187,24 +187,40 @@ resource "aws_cloudwatch_dashboard" "application" {
           title  = "Application Request Rate"
         }
       },
-      # Error Rate (4xx and 5xx)
+      # Target Error Rates
       {
         type   = "metric"
         x      = 12
         y      = 0
-        width  = 12
+        width  = 6
         height = 6
         properties = {
           metrics = [
             ["AWS/ApplicationELB", "HTTPCode_Target_4XX_Count", "LoadBalancer", aws_lb.main.arn_suffix, { stat = "Sum", label = "4XX Errors" }],
-            ["...", "HTTPCode_Target_5XX_Count", ".", ".", { stat = "Sum", label = "5XX Errors" }],
-            ["...", "HTTPCode_ELB_4XX_Count", ".", ".", { stat = "Sum", label = "ALB 4XX" }],
+            ["...", "HTTPCode_Target_5XX_Count", ".", ".", { stat = "Sum", label = "5XX Errors" }]
+          ]
+          period = 300
+          stat   = "Sum"
+          region = var.aws_region
+          title  = "Target Error Rates"
+        }
+      },
+      # ALB Error Rates
+      {
+        type   = "metric"
+        x      = 18
+        y      = 0
+        width  = 6
+        height = 6
+        properties = {
+          metrics = [
+            ["AWS/ApplicationELB", "HTTPCode_ELB_4XX_Count", "LoadBalancer", aws_lb.main.arn_suffix, { stat = "Sum", label = "ALB 4XX" }],
             ["...", "HTTPCode_ELB_5XX_Count", ".", ".", { stat = "Sum", label = "ALB 5XX" }]
           ]
           period = 300
           stat   = "Sum"
           region = var.aws_region
-          title  = "Error Rate (4XX & 5XX)"
+          title  = "ALB Error Rates"
         }
       },
       # Latency Metrics
