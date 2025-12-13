@@ -35,9 +35,9 @@ jobs:
           scan-type: 'fs'
           scan-ref: '.'
           format: 'table'
-          exit-code: '0' 
+          exit-code: '' 
           ignore-unfixed: true
-          severity: 'CRITICAL,HIGH'
+          #severity: 'CRITICAL,HIGH'
 
   notify-on-failure:
     name: Email Notification (CI Failure)
