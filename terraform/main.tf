@@ -1,19 +1,19 @@
 module "vpc" {
   source             = "./modules/vpc"
-  env                = "dev"
-  vpc_cidr           = "10.0.0.0/16"
-  public_subnets     = ["10.0.1.0/24", "10.0.2.0/24"]
-  private_subnets    = ["10.0.101.0/24", "10.0.102.0/24"]
-  availability_zones = ["us-east-1a", "us-east-1b"]
+  env                = var.environment
+  vpc_cidr           = var.vpc_cidr
+  public_subnets     = var.public_subnets
+  private_subnets    = var.private_subnets
+  availability_zones = var.availability_zones
 }
 
 module "ec2" {
   source            = "./modules/ec2"
-  env               = "dev"
-  vpc_id            = module.vpc.vpc_id          # ← Pass VPC ID here
+  env               = var.environment
+  vpc_id            = module.vpc.vpc_id
   public_subnet_ids = module.vpc.public_subnet_ids
-  instance_type     = "t3.micro"
-  ami_id            = "ami-03f9680ef0c07a3d1"
+  instance_type     = var.instance_type
+  ami_id            = var.ami_id
   key_name          = var.key_name
 }
 
@@ -54,7 +54,7 @@ module "alb" {
 
 module "rds" {
   source             = "./modules/rds"
-  env                = "dev"
+  env                = var.environment
   project            = var.project
   vpc_id             = module.vpc.vpc_id
   private_subnet_ids = module.vpc.private_subnet_ids

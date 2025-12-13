@@ -37,7 +37,7 @@ jobs:
         image-ref: 'soundaryanarayana6/octabyte-assignment:latest'
         exit-code: '1'
         ignore-unfixed: true
-        vuln-type: 'OS,config,secret'
+        vuln-type: 'os,library'
         severity: 'CRITICAL,HIGH'
 
     - name: Upload Trivy scan report
